@@ -13,7 +13,7 @@ export default function Page() {
   const fabricRef = useRef<fabric.Canvas | null>(null);
   const isDrawing = useRef(false);
   const shapeRef = useRef<fabric.Object | null>(null);
-  const selectedShapeRef = useRef<string | null>("rectangle");
+  const selectedShapeRef = useRef<string | null>(null);
   const [activeElement, setActiveElement] = useState<ActiveElement>({
     name: "",
     value: "",
@@ -24,22 +24,22 @@ export default function Page() {
     selectedShapeRef.current=elem?.value as string;
   }
   useEffect(() => {
-    const canvas = initializeFabric({ canvasRef, fabricRef })
+    console.log("useEffect is called");
+    const canvas = initializeFabric({ canvasRef, fabricRef });
     canvas.on("mouse:down", (options) => {
-    
       handleCanvasMouseDown({
         options,
         canvas,
         isDrawing,
         shapeRef,
         selectedShapeRef
-      })
-      console.log("work")
-    })
-
+      });
+      console.log("work");
+    });
+  
     window.addEventListener("resize", () => {
-      handleResize({ fabricRef })
-    })
+      handleResize({ fabricRef });
+    });
   }, []);
 
   return (
